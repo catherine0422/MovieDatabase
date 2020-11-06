@@ -1,0 +1,4 @@
+/imdb-reduced/
+data/*
+log/*
+!.gitignore
