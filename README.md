@@ -11,7 +11,7 @@ This is a sql project that manages a movie database.
 
 ## Installation
 
-1. Download the IMDB dataset and extract the folder into out root path.
+1. Download the IMDB dataset and extract the folder into our root path.
 
 2. Create a file named 'logFile.txt' in the log folder.
 
