@@ -15,3 +15,4 @@
 -   `down.sql`: To eliminate the change brought by `up.sql`, only for debug use
 -   `up_index.sql`: To add INDEX on tables
 -   `down_index.sql`: To eliminate the change brought by `up_index.sql`, only for debug use
+-   `Kunhao&Yujia-create.sql`: Official hand-in file.
