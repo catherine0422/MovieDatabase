@@ -55,12 +55,12 @@ ORDER BY
 -- Find the name of all the people that have played in a movie they directed, and order them by their names
 -- (increasing alphabetical order).
 SELECT
-    P.name
+    DISTINCT P.name
 FROM
     person P,
     (
         SELECT
-            person_id
+            person_id,movie_id
         FROM
             cast_info
         WHERE
@@ -68,7 +68,7 @@ FROM
             OR role_id = 2
         INTERSECT
         SELECT
-            person_id
+            person_id,movie_id
         FROM
             cast_info
         WHERE
