@@ -1,0 +1,25 @@
+Aggregate  (cost=140412.81..140412.82 rows=1 width=32) (actual time=7750.875..7750.876 rows=1 loops=1)
+  ->  GroupAggregate  (cost=140412.77..140412.79 rows=1 width=13) (actual time=7750.514..7750.854 rows=6 loops=1)
+        Group Key: m.production_year
+        ->  Sort  (cost=140412.77..140412.78 rows=1 width=9) (actual time=7750.371..7750.416 rows=240 loops=1)
+              Sort Key: m.production_year
+              Sort Method: quicksort  Memory: 36kB
+              ->  Nested Loop  (cost=112312.61..140412.76 rows=1 width=9) (actual time=7419.651..7749.785 rows=240 loops=1)
+                    ->  Gather  (cost=112312.31..140412.44 rows=1 width=4) (actual time=7419.606..7766.894 rows=240 loops=1)
+                          Workers Planned: 2
+                          Workers Launched: 2
+                          ->  Parallel Hash Join  (cost=111312.31..139412.34 rows=1 width=4) (actual time=7059.285..7651.323 rows=80 loops=3)
+                                Hash Cond: (c.person_id = p.id)
+                                ->  Parallel Seq Scan on cast_info c  (cost=0.00..27419.42 rows=259279 width=8) (actual time=716.465..1410.762 rows=238483 loops=3)
+                                      Filter: ((role_id = 1) OR (role_id = 2))
+                                      Rows Removed by Filter: 208526
+                                ->  Parallel Hash  (cost=111312.30..111312.30 rows=1 width=4) (actual time=6196.704..6196.704 rows=6 loops=3)
+                                      Buckets: 1024  Batches: 1  Memory Usage: 104kB
+                                      ->  Parallel Seq Scan on person p  (cost=0.00..111312.30 rows=1 width=4) (actual time=977.033..6196.523 rows=6 loops=3)
+                                            Filter: ((name)::text = 'Ross, Kevin'::text)
+                                            Rows Removed by Filter: 1925132
+                    ->  Index Scan using movie_pkey on movie m  (cost=0.29..0.32 rows=1 width=9) (actual time=0.004..0.004 rows=1 loops=240)
+                          Index Cond: (id = c.movie_id)
+                          Filter: (episode_of_id IS NOT NULL)
+Planning Time: 0.894 ms
+Execution Time: 7769.433 ms
