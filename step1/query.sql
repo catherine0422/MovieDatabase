@@ -80,6 +80,8 @@ ORDER BY
     P.name ASC;
 
 -- Find the titles of the movies that have only 1, 9 and 10 as rating.
+--
+-- Condition1: ratings contain exactly 1, 9 and 10
 SELECT
     M.title
 FROM
@@ -87,6 +89,16 @@ FROM
     movie M
 WHERE
     MR.info ~ '\d\.\.\.\.\.\.\.\d\d'
+    AND M.id = MR.movie_id;
+
+-- Condition2: ratings are in 1, 9 and 10
+SELECT
+    M.title
+FROM
+    movie_rating MR,
+    movie M
+WHERE
+    MR.info LIKE '_.......%%'
     AND M.id = MR.movie_id;
 
 -- Find the titles of the twenty movies having the largest number of directors and their number of directors,
