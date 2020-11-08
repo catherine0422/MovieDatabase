@@ -89,10 +89,10 @@ ALTER TABLE
     "public"."company_type" DROP CONSTRAINT "company_type_kind_check" CASCADE;
 
 ALTER TABLE
-    "public"."complete_cast" DROP CONSTRAINT "complete_cast_subject_id_check" CASCADE;
+    "public"."complete_cast" DROP CONSTRAINT "complete_cast_status_id_check" CASCADE;
 
 ALTER TABLE
-    "public"."complete_cast" DROP CONSTRAINT "complete_cast_subject_id_check1" CASCADE;
+    "public"."complete_cast" DROP CONSTRAINT "complete_cast_subject_id_check" CASCADE;
 
 ALTER TABLE
     "public"."info_type" DROP CONSTRAINT "info_type_info_check" CASCADE;

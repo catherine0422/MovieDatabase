@@ -118,9 +118,9 @@ CREATE TABLE "complete_cast"(
         OR "subject_id" IS NULL
     ),
     "status_id" INTEGER REFERENCES comp_cast_type(id) CHECK(
-        "subject_id" = 3
-        OR "subject_id" = 4
-        OR "subject_id" IS NULL
+        "status_id" = 3
+        OR "status_id" = 4
+        OR "status_id" IS NULL
     ),
     FOREIGN KEY (movie_id) REFERENCES movie(id) ON DELETE CASCADE
 );

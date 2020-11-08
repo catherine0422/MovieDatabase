@@ -10,6 +10,7 @@
 -   `hack_create.sql`: To generate SQL code to add all constraints, the result is stored in `add_command.sql`
 -   `hack_drop.sql`: To generate SQL code to drop all constraints, the result is stored in `drop_command.sql`
 -   `copy.sql`: To copy the data from `.csv` file to database using absolute path. Normally it only works on my computer.
+-   `copy_for_loop.sql`:  Using a for loop structure to copy the data, change the imdb_path parameter into the proper path of user in order to run it successfully. 
 -   `query.sql`: The answer to the question in Section 4
 -   `up.sql`: The answer to the question in Section 4.1
 -   `down.sql`: To eliminate the change brought by `up.sql`, only for debug use

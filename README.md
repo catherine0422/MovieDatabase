@@ -63,3 +63,64 @@ taskkill /PID <PID> /F
 ```{powershell}
 psql -U $env:UserName -d postgres
 ```
+
+7. To delete all the tables and contents. (cf [StackOverflow](https://stackoverflow.com/questions/3327312/how-can-i-drop-all-the-tables-in-a-postgresql-database))
+
+```
+DROP SCHEMA public CASCADE;
+CREATE SCHEMA public;
+GRANT ALL ON SCHEMA public TO public;
+```
+
+## Create DataBase
+
+```
+postgres=# \i create.sql
+postgres=# \o drop_command.sql
+postgres=# \i hack_drop.sql
+postgres=# \o
+```
+
+Then remove the redundant lines in `drop_command.sql`.
+
+```
+postgres=# \o add_command.sql
+postgres=# \i hack_create.sql
+postgres=# \o
+```
+
+Then remove the redundant lines in `add_command.sql`.
+
+```
+postgres=# \i drop_command.sql
+```
+
+Change the path correctly in your `copy_for_loop.sql`, Then copy the data in csv file into database.
+
+```
+postgres=# \i copy_for_loop.sql
+```
+
+Add constraints.
+
+```
+postgres=# \i add_command.sql
+```
+
+Execute the queries.
+
+```
+postgres=# \i query.sql
+```
+
+Update the database.
+
+```
+postgres=# \i up.sql
+```
+
+To remove the change.
+
+```
+postgres=# \i down.sql
+```
