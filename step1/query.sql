@@ -160,4 +160,4 @@ FROM
             FOO.episode_of_id IS NOT NULL
         GROUP BY
             production_year
-    ) AS BAR
+    ) AS BAR;
