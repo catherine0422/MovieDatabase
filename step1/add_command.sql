@@ -141,10 +141,10 @@ ADD
 ALTER TABLE
     "public"."complete_cast"
 ADD
-    CONSTRAINT "complete_cast_subject_id_check1" CHECK (
+    CONSTRAINT "complete_cast_subject_id_check" CHECK (
         (
-            (subject_id = 3)
-            OR (subject_id = 4)
+            (subject_id = 1)
+            OR (subject_id = 2)
             OR (subject_id IS NULL)
         )
     );
@@ -152,11 +152,11 @@ ADD
 ALTER TABLE
     "public"."complete_cast"
 ADD
-    CONSTRAINT "complete_cast_subject_id_check" CHECK (
+    CONSTRAINT "complete_cast_status_id_check" CHECK (
         (
-            (subject_id = 1)
-            OR (subject_id = 2)
-            OR (subject_id IS NULL)
+            (status_id = 3)
+            OR (status_id = 4)
+            OR (status_id IS NULL)
         )
     );
 

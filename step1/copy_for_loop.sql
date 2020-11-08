@@ -1,7 +1,7 @@
 DO $$
 DECLARE
     file character varying;
-    imdb_path text := 'C:/Users/ZT/Documents/university/course/3A/INF553_db/project/db/imdb-reduced';
+    imdb_path text := 'D:/SS/Study/X/3A/INF553/Project/imdb-reduced';
 BEGIN
     FOR file IN
             SELECT table_name
