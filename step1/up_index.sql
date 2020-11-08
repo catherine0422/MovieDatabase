@@ -17,3 +17,5 @@ CREATE INDEX "cast_info__movie_id" ON "cast_info"("movie_id");
 CREATE INDEX "cast_info__person_role_id" ON "cast_info" USING HASH ("person_role_id");
 
 CREATE INDEX "cast_info__role_id" ON "cast_info"("role_id");
+
+CREATE INDEX "movie_rating__info" ON "movie_rating"("info");

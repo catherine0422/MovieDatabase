@@ -17,3 +17,5 @@ DROP INDEX IF EXISTS cast_info__movie_id;
 DROP INDEX IF EXISTS cast_info__person_role_id;
 
 DROP INDEX IF EXISTS cast_info__role_id;
+
+DROP INDEX IF EXISTS movie_rating__info;
