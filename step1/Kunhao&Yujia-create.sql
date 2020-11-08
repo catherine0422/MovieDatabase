@@ -3,8 +3,10 @@
  Author: Kunhao ZHENG / Yujia FU 
  Create Date: 11/08/2020
  */
---
--- Create Table.
+--*******************************************************************************
+--************** 1.  DEPLOY THE SCHEMA OF THE DATABASE   ************************
+--*******************************************************************************
+
 CREATE TABLE "person"(
     "id" INTEGER PRIMARY KEY,
     "name" VARCHAR(128) NOT NULL CHECK(LENGTH("name") > 0),
@@ -345,8 +347,34 @@ ALTER TABLE
 ALTER TABLE
     "public"."role_type" DROP CONSTRAINT "role_type_pkey" CASCADE;
 
---
--- Copy data from csv file into database. Please specify the imdb_reduced path.
+--************************************************************************
+--************************   2.  IMPORT DATA  ****************************
+--************************************************************************
+
+-- Method 1
+COPY person FROM 'D:/SS/Study/X/3A/INF553/Project/imdb-reduced/person.csv' CSV HEADER;
+COPY info_type FROM 'D:/SS/Study/X/3A/INF553/Project/imdb-reduced/info_type.csv' CSV HEADER;
+COPY link_type FROM 'D:/SS/Study/X/3A/INF553/Project/imdb-reduced/link_type.csv' CSV HEADER;
+COPY comp_cast_type FROM 'D:/SS/Study/X/3A/INF553/Project/imdb-reduced/comp_cast_type.csv' CSV HEADER;
+COPY movie_type FROM 'D:/SS/Study/X/3A/INF553/Project/imdb-reduced/movie_type.csv' CSV HEADER;
+COPY role_type FROM 'D:/SS/Study/X/3A/INF553/Project/imdb-reduced/role_type.csv' CSV HEADER;
+COPY aka_name FROM 'D:/SS/Study/X/3A/INF553/Project/imdb-reduced/aka_name.csv' CSV HEADER;
+COPY movie FROM 'D:/SS/Study/X/3A/INF553/Project/imdb-reduced/movie.csv' CSV HEADER;
+COPY keyword FROM 'D:/SS/Study/X/3A/INF553/Project/imdb-reduced/keyword.csv' CSV HEADER;
+COPY person_info FROM 'D:/SS/Study/X/3A/INF553/Project/imdb-reduced/person_info.csv' CSV HEADER;
+COPY company FROM 'D:/SS/Study/X/3A/INF553/Project/imdb-reduced/company.csv' CSV HEADER;
+COPY company_type FROM 'D:/SS/Study/X/3A/INF553/Project/imdb-reduced/company_type.csv' CSV HEADER;
+COPY movie_company FROM 'D:/SS/Study/X/3A/INF553/Project/imdb-reduced/movie_company.csv' CSV HEADER;
+COPY aka_title FROM 'D:/SS/Study/X/3A/INF553/Project/imdb-reduced/aka_title.csv' CSV HEADER;
+COPY char_name FROM 'D:/SS/Study/X/3A/INF553/Project/imdb-reduced/char_name.csv' CSV HEADER;
+COPY cast_info FROM 'D:/SS/Study/X/3A/INF553/Project/imdb-reduced/cast_info.csv' CSV HEADER;
+COPY complete_cast FROM 'D:/SS/Study/X/3A/INF553/Project/imdb-reduced/complete_cast.csv' CSV HEADER;
+COPY movie_rating FROM 'D:/SS/Study/X/3A/INF553/Project/imdb-reduced/movie_rating.csv' CSV HEADER;
+COPY movie_info FROM 'D:/SS/Study/X/3A/INF553/Project/imdb-reduced/movie_info.csv' CSV HEADER;
+COPY movie_keyword FROM 'D:/SS/Study/X/3A/INF553/Project/imdb-reduced/movie_keyword.csv' CSV HEADER;
+COPY movie_link FROM 'D:/SS/Study/X/3A/INF553/Project/imdb-reduced/movie_link.csv' CSV HEADER;
+
+-- Method 2
 DO $$
 DECLARE
     file character varying;
@@ -702,7 +730,10 @@ CREATE INDEX "cast_info__role_id" ON "cast_info"("role_id");
 
 CREATE INDEX "movie_rating__info" ON "movie_rating"("info");
 
--- Queries.
+--************************************************************************
+--****************************  3.     QUERYS       **********************
+--************************************************************************
+
 -- Find the pairs of (movie title, actor name) such that the actor played in the movie.
 SELECT
     M.title,
@@ -867,8 +898,10 @@ FROM
             production_year
     ) AS BAR;
 
---
--- Update database: Create a new table "vote_distribution"
+--************************************************************************
+--*************************     4.    UPDATE       ***********************
+--************************************************************************
+
 DROP TABLE IF EXISTS "vote_distribution";
 
 CREATE TABLE "vote_distribution"(
