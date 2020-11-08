@@ -60,7 +60,8 @@ FROM
     person P,
     (
         SELECT
-            person_id,movie_id
+            person_id,
+            movie_id
         FROM
             cast_info
         WHERE
@@ -68,7 +69,8 @@ FROM
             OR role_id = 2
         INTERSECT
         SELECT
-            person_id,movie_id
+            person_id,
+            movie_id
         FROM
             cast_info
         WHERE
@@ -131,7 +133,7 @@ WHERE
 SELECT
     AVG(count) as avg_episode_nr
 FROM
-(
+    (
         SELECT
             COUNT(DISTINCT FOO.id) as count
         FROM
