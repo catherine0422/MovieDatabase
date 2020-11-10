@@ -706,29 +706,7 @@ ALTER TABLE
 ADD
     CONSTRAINT "aka_name_person_id_fkey" FOREIGN KEY (person_id) REFERENCES person(id) ON DELETE CASCADE;
 
---
--- Create INDEX for tables.
-CREATE INDEX "person__name" ON "person" USING HASH ("name");
 
-CREATE INDEX "aka_name__person_id" ON "aka_name"("person_id");
-
-CREATE INDEX "aka_name__name" ON "aka_name" USING HASH ("name");
-
-CREATE INDEX "movie__production_year" ON "movie"("production_year");
-
-CREATE INDEX "person_info__person_id" ON "person_info"("person_id");
-
-CREATE INDEX "char_name__name" ON "char_name" USING HASH ("name");
-
-CREATE INDEX "cast_info__person_id" ON "cast_info"("person_id");
-
-CREATE INDEX "cast_info__movie_id" ON "cast_info"("movie_id");
-
-CREATE INDEX "cast_info__person_role_id" ON "cast_info" USING HASH ("person_role_id");
-
-CREATE INDEX "cast_info__role_id" ON "cast_info"("role_id");
-
-CREATE INDEX "movie_rating__info" ON "movie_rating"("info");
 
 --************************************************************************
 --****************************  3.     QUERYS       **********************
@@ -784,6 +762,10 @@ WHERE
     AND C.person_id = P.id
     AND P.name = 'Ross, Kevin'
     AND M.production_year IS NOT NULL
+    AND (
+        C.role_id = 1
+        OR C.role_id = 2
+    )
 ORDER BY
     M.production_year DESC,
     M.title ASC;
