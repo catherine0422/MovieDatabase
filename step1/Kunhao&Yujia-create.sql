@@ -784,6 +784,10 @@ WHERE
     AND C.person_id = P.id
     AND P.name = 'Ross, Kevin'
     AND M.production_year IS NOT NULL
+    AND (
+        C.role_id = 1
+        OR C.role_id = 2
+    )
 ORDER BY
     M.production_year DESC,
     M.title ASC;
