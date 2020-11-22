@@ -52,6 +52,8 @@ https://explain.dalibo.com/plan/Kb
 
 ### Statistics 10000
 
+Although on the website the filename is like "s1000", actually the statistics is 10000.
+
 https://explain.dalibo.com/plan/yWq
 
 https://explain.dalibo.com/plan/KH
