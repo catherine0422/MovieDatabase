@@ -7,40 +7,59 @@
 ### Cold Run
 
 https://explain.dalibo.com/plan/dVh
+
 https://explain.dalibo.com/plan/fyK
+
 https://explain.dalibo.com/plan/wlR
+
 https://explain.dalibo.com/plan/tKZ
+
 https://explain.dalibo.com/plan/Kgf
 
 ### Hot Run
 
 https://explain.dalibo.com/plan/w1n
+
 https://explain.dalibo.com/plan/Si0
+
 https://explain.dalibo.com/plan/0k6
+
 https://explain.dalibo.com/plan/3ob
+
 https://explain.dalibo.com/plan/bLs
 
 ### After Creating View
 
 https://explain.dalibo.com/plan/sOj
+
 https://explain.dalibo.com/plan/fnT
+
 https://explain.dalibo.com/plan/iWr
+
 https://explain.dalibo.com/plan/nUr
 
 ### After Creating Index
 
 https://explain.dalibo.com/plan/NcF
+
 https://explain.dalibo.com/plan/EDk
+
 https://explain.dalibo.com/plan/L0V
+
 https://explain.dalibo.com/plan/Nmt
+
 https://explain.dalibo.com/plan/Kb
 
 ### Statistics 1000
 
 https://explain.dalibo.com/plan/yWq
+
 https://explain.dalibo.com/plan/KH
+
 https://explain.dalibo.com/plan/dOU
+
 https://explain.dalibo.com/plan/6Q8
+
 https://explain.dalibo.com/plan/0y
 
 ### File Description
