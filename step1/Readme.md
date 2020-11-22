@@ -50,7 +50,7 @@ https://explain.dalibo.com/plan/Nmt
 
 https://explain.dalibo.com/plan/Kb
 
-### Statistics 1000
+### Statistics 10000
 
 https://explain.dalibo.com/plan/yWq
 
