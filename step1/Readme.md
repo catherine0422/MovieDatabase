@@ -16,7 +16,7 @@ https://explain.dalibo.com/plan/tKZ
 
 https://explain.dalibo.com/plan/Kgf
 
-### Hot Run
+### Warm Run
 
 https://explain.dalibo.com/plan/w1n
 
@@ -76,3 +76,6 @@ https://explain.dalibo.com/plan/0y
 -   `up_index.sql`: To add INDEX on tables
 -   `down_index.sql`: To eliminate the change brought by `up_index.sql`, only for debug use
 -   `Kunhao&Yujia-create.sql`: Official hand-in file.
+-   `statistics.sql`: Script to change statistics of table.
+-   `clustering.sql`: SQL script to cluster the index.
+-   `test.sql`: Simple file to inspect the physical plan of query.
