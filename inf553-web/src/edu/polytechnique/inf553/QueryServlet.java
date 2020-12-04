@@ -18,57 +18,54 @@ import java.util.ArrayList;
 /**
  * Servlet implementation class QueryServlet
  */
-@WebServlet(
-		urlPatterns = { "/QueryServlet" }, 
-		initParams = { 
-				@WebInitParam(name = "maxYear", value = "2050", description = "the maximum year")
-		})
+@WebServlet(urlPatterns = { "/QueryServlet" }, initParams = {
+		@WebInitParam(name = "maxYear", value = "2050", description = "the maximum year") })
 public class QueryServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-       
-    /**
-     * @see HttpServlet#HttpServlet()
-     */
-    public QueryServlet() {
-        super();
-        // TODO Auto-generated constructor stub
-    }
 
 	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
+	 * @see HttpServlet#HttpServlet()
 	 */
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException, IllegalStateException {
-		// TODO Auto-generated method stub
+	public QueryServlet() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
+
+	/**
+	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse
+	 *      response)
+	 */
+	protected void doGet(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException, IllegalStateException {
 		response.getWriter().append("Served at: ").append(request.getContextPath());
 		request.setCharacterEncoding("utf-8");
-		String query_year = "2010";
+		String query_year = request.getParameter("year");
+		String maxYear = this.getServletConfig().getInitParameter("maxYear");
+		// TODO if query_year bigger than maxYear throws an exception
+		System.out.println(maxYear);
 		ArrayList<QueryInfo> resultList = null;
 		try {
 			resultList = Postgresql.queryIndex(query_year);
 		} catch (ClassNotFoundException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		String title = null;
 		System.out.println(resultList);
-		request.setAttribute("message", "Hello, Kunhao\n");
+		// request.setAttribute("message", "Hello, Kunhao\n");
 		request.setAttribute("year", query_year);
 		request.setAttribute("infos", resultList);
 		request.getRequestDispatcher("Index.jsp").forward(request, response);
 	}
 
 	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
+	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse
+	 *      response)
 	 */
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
+	protected void doPost(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+		// TODO I don't think doPost is necessary
 		doGet(request, response);
 	}
 
 }
-
-
-
