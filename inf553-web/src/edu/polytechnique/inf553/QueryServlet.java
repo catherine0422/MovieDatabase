@@ -51,7 +51,7 @@ public class QueryServlet extends HttpServlet {
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
-		System.out.println(resultList);
+		// System.out.println(resultList);
 		// request.setAttribute("message", "Hello, Kunhao\n");
 		request.setAttribute("year", query_year);
 		request.setAttribute("infos", resultList);

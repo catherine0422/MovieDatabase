@@ -29,10 +29,13 @@ public class Postgresql {
 		ResultSet resultSet = null; // sql查询的返回数据集合
 		connection = DriverManager.getConnection(url);
 		statmment = connection.createStatement();
-		String querySqlString = "SELECT\n" + "P.id, P.name, P.gender, COUNT(M.id) as movie_nr\n" + "FROM\n"
-				+ "person P, actors_info A, movie M\n" + "WHERE\n" + "    P.id = A.person_id\n"
-				+ "    AND M.id = A.movie_id\n" + String.format("    AND M.production_year = '%s'\n", production_year)
-				+ "GROUP BY\n" + "    P.id\n" + "ORDER BY\n" + "    movie_nr DESC;";
+		String querySqlString = "SELECT P.id, P.name, P.gender, COUNT(M.id) as movie_nr\n" + 
+								"FROM person P, actors_info A, movie M\n" + 
+								"WHERE P.id = A.person_id\n" + 
+								"    AND M.id = A.movie_id\n" + String.format("    AND M.production_year = '%s'\n", production_year)+ 
+								"GROUP BY P.id\n" + 
+								"ORDER BY movie_nr DESC\n" + 
+								"LIMIT 20 OFFSET 0;";
 		// System.out.println(con);
 		// 预编译对象
 		PreparedStatement ps = connection.prepareStatement(querySqlString);
