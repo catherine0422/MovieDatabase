@@ -40,12 +40,17 @@ public class QueryServlet extends HttpServlet {
 		response.getWriter().append("Served at: ").append(request.getContextPath());
 		request.setCharacterEncoding("utf-8");
 		String query_year = request.getParameter("year");
+		String str_page = request.getParameter("page");
+		int page = 1;
+		if (str_page != null) {
+			page = Integer.parseInt(str_page);
+		}
 		String maxYear = this.getServletConfig().getInitParameter("maxYear");
 		// TODO if query_year bigger than maxYear throws an exception
 		System.out.println(maxYear);
 		ArrayList<QueryInfo> resultList = null;
 		try {
-			resultList = Postgresql.queryIndex(query_year);
+			resultList = Postgresql.queryIndex(query_year, page);
 		} catch (ClassNotFoundException e) {
 			e.printStackTrace();
 		} catch (SQLException e) {

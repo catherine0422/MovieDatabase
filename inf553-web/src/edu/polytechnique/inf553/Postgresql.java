@@ -11,14 +11,14 @@ import java.util.ArrayList;
 public class Postgresql {
 	// TODO delete this main function when you think you fully understand
 	public static void main(String[] args) throws Exception {
-		queryIndex("2010");
+		queryIndex("2010", 0);
 	}
 
 	/**
 	 * @throws ClassNotFoundException
 	 * @throws SQLException
 	 */
-	public static ArrayList<QueryInfo> queryIndex(String production_year) throws ClassNotFoundException, SQLException {
+	public static ArrayList<QueryInfo> queryIndex(String production_year, int page) throws ClassNotFoundException, SQLException {
 		// 加载驱动
 		Class.forName("org.postgresql.Driver");
 		// 获得连接对象: 注意：mydb是数据库；postgres：用户名; 123456:密码
@@ -29,16 +29,21 @@ public class Postgresql {
 		ResultSet resultSet = null; // sql查询的返回数据集合
 		connection = DriverManager.getConnection(url);
 		statmment = connection.createStatement();
-		String querySqlString = "SELECT P.id, P.name, P.gender, COUNT(M.id) as movie_nr\n" + 
-								"FROM person P, actors_info A, movie M\n" + 
-								"WHERE P.id = A.person_id\n" + 
-								"    AND M.id = A.movie_id\n" + String.format("    AND M.production_year = '%s'\n", production_year)+ 
-								"GROUP BY P.id\n" + 
-								"ORDER BY movie_nr DESC\n" + 
-								"LIMIT 20 OFFSET 0;";
+		final int onePageRecords = 20;
+		String querySqlString = "SELECT P.id, P.name, P.gender, COUNT(M.id) as movie_nr" + 
+								" FROM person P, actors_info A, movie M" + 
+								" WHERE P.id = A.person_id" + 
+								" AND M.id = A.movie_id AND M.production_year =?" + 
+								" GROUP BY P.id" + 
+								" ORDER BY movie_nr DESC" + 
+								" LIMIT ? OFFSET ?;";
 		// System.out.println(con);
 		// 预编译对象
 		PreparedStatement ps = connection.prepareStatement(querySqlString);
+		
+		ps.setString(1, production_year);
+		ps.setInt(2, onePageRecords);
+		ps.setInt(3, (page - 1) * onePageRecords);
 		// 返回结果集
 		ResultSet rs = ps.executeQuery();
 		// 遍历数据
