@@ -29,7 +29,7 @@ public class Postgresql {
 		ResultSet resultSet = null; // sql查询的返回数据集合
 		connection = DriverManager.getConnection(url);
 		statmment = connection.createStatement();
-		final int onePageRecords = 20;
+		final int onePageRecords = 5;
 		String querySqlString = "SELECT P.id, P.name, P.gender, COUNT(M.id) as movie_nr" + 
 								" FROM person P, actors_info A, movie M" + 
 								" WHERE P.id = A.person_id" + 
