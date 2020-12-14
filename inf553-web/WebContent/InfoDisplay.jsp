@@ -83,7 +83,7 @@
 		  	<thead class="thead-light">
 		 		<tr>
 					<th scope="col">Movie Id</th>
-					<th scope="col">Movie Name</th>
+					<th scope="col" class="w-75">Movie Name</th>
 				</tr>
 			</thead>
 			<!-- body of table -->
