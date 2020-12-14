@@ -39,7 +39,6 @@ public class InfoDisplay extends HttpServlet {
 		try {
 			pif = Postgresql.queryPersonInfo(pid);
 			mif = Postgresql.queryMovieInfo(pid);
-
 		} catch (ClassNotFoundException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

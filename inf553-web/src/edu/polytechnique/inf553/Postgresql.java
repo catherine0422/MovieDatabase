@@ -54,6 +54,21 @@ public class Postgresql {
 		return resultList;
 	}
 	
+	public static ArrayList<QueryInfo> rsToArrayList(ResultSet rs) throws SQLException {
+		ArrayList<QueryInfo> resultList = new ArrayList<>();
+		if (rs == null)
+			return null;
+		while (rs.next()) {
+			String p_id = rs.getString("id");
+			String p_name = rs.getString("name");
+			String p_gender = rs.getString("gender");
+			int movie_nr = rs.getInt("movie_nr");
+			resultList.add(new QueryInfo(p_id, p_name, p_gender, movie_nr));
+		}
+		return resultList;
+
+	}
+	
 	public static int queryTotalPages(String production_year, int rowsPerPage) throws ClassNotFoundException, SQLException {
 		// 加载驱动
 		Class.forName("org.postgresql.Driver");
@@ -87,21 +102,6 @@ public class Postgresql {
 		return totalPages;
 	}
 
-	public static ArrayList<QueryInfo> rsToArrayList(ResultSet rs) throws SQLException {
-		ArrayList<QueryInfo> resultList = new ArrayList<>();
-		if (rs == null)
-			return null;
-		while (rs.next()) {
-			String p_id = rs.getString("id");
-			String p_name = rs.getString("name");
-			String p_gender = rs.getString("gender");
-			int movie_nr = rs.getInt("movie_nr");
-			resultList.add(new QueryInfo(p_id, p_name, p_gender, movie_nr));
-		}
-		return resultList;
-
-	}
-
 	public static PersonInfo queryPersonInfo(String pid) throws ClassNotFoundException, SQLException {
 		// 加载驱动
 		Class.forName("org.postgresql.Driver");
@@ -113,23 +113,36 @@ public class Postgresql {
 		ResultSet resultSet = null; // sql查询的返回数据集合
 		connection = DriverManager.getConnection(url);
 		statmment = connection.createStatement();
+		String queryGender = "SELECT P.gender, P.name" + 
+				" FROM person P" + 
+				" WHERE P.id = " + pid +";";
+		
+		ResultSet rsGender = statmment.executeQuery(queryGender);
+		String gender = null;
+		String name = null;
+		while (rsGender.next()) {
+			gender = rsGender.getString("gender");
+			name =  rsGender.getString("name");
+		}
+		rsGender.close();
+		
+		
+		String queryBirthday = "SELECT P.info" +
+							   " FROM person_info P" +
+							   " WHERE P.info_type_id = 21 AND P.id = " + pid;
+		ResultSet rsBirthday = statmment.executeQuery(queryBirthday);
+		String birthyear = null;
+		while (rsBirthday.next()) {
+			String birthday = rsBirthday.getString("info");
+			// get the birth year
+			birthyear = birthday.substring(birthday.length() - 4);
+		}
+		rsBirthday.close();
 
-		// TODO
-		// Write the query to get the info
+		PersonInfo personInfo = new PersonInfo(pid, gender, name, birthyear);
 
-		// System.out.println(con);
-		// 预编译对象
-		// PreparedStatement ps = connection.prepareStatement(querySqlString);
-		// 返回结果集
-		// ResultSet rs = ps.executeQuery();
-		// 遍历数据
-		// TODO change this!
-		PersonInfo result = new PersonInfo("123", "kunhao", "Kunhao", "1998");
-		// 关闭连接
-		// rs.close();
-		// ps.close();
 		connection.close();
-		return result;
+		return personInfo;
 	}
 
 	public static ArrayList<MovieInfo> queryMovieInfo(String pid) throws ClassNotFoundException, SQLException {
@@ -143,23 +156,18 @@ public class Postgresql {
 		ResultSet resultSet = null; // sql查询的返回数据集合
 		connection = DriverManager.getConnection(url);
 		statmment = connection.createStatement();
-
-		// TODO
-		// Write the query to get the info
-
-		// System.out.println(con);
-		// 预编译对象
-		// PreparedStatement ps = connection.prepareStatement(querySqlString);
-		// 返回结果集
-		// ResultSet rs = ps.executeQuery();
-		// 遍历数据
-		// TODO change this!!
-		ArrayList<MovieInfo> resultList = new ArrayList<>();
-		resultList.add(new MovieInfo("12", "Back to the Future"));
-		// 关闭连接
-		// rs.close();
-		// ps.close();
+		
+		String queryMovies = "SELECT DISTINCT M.id, M.title" + 
+				" FROM movie M, cast_info cf" + 
+				" WHERE cf.movie_id = M.id AND cf.person_id = " + pid +";";
+		
+		ResultSet rsMovies = statmment.executeQuery(queryMovies);
+		ArrayList<MovieInfo> movieList = new ArrayList<>();
+		while (rsMovies.next()) {
+			movieList.add(new MovieInfo(rsMovies.getString("id"), rsMovies.getString("title")));
+		}
+		rsMovies.close();
 		connection.close();
-		return resultList;
+		return movieList;
 	}
 }
