@@ -53,6 +53,39 @@ public class Postgresql {
 		connection.close();
 		return resultList;
 	}
+	
+	public static int queryTotalPages(String production_year, int rowsPerPage) throws ClassNotFoundException, SQLException {
+		// 加载驱动
+		Class.forName("org.postgresql.Driver");
+		// 获得连接对象: 注意：mydb是数据库；postgres：用户名; 123456:密码
+		String url = "jdbc:postgresql://127.0.0.1:5432/postgres";
+		Connection connection = null; // 连接接口实例
+		Statement statmment = null; // 执行静态sql的接口实例
+		PreparedStatement preStatement = null; // 执行动态sql的接口实例
+		ResultSet resultSet = null; // sql查询的返回数据集合
+		connection = DriverManager.getConnection(url);
+		statmment = connection.createStatement();
+		String querySqlString = "SELECT COUNT(DISTINCT A.person_id) as nPersons" +
+				 " FROM actors_info A, movie M" +
+				 " WHERE M.id = A.movie_id AND M.production_year = ?;";
+		// System.out.println(con);
+		// 预编译对象
+		PreparedStatement ps = connection.prepareStatement(querySqlString);
+		
+		ps.setString(1, production_year);
+		// 返回结果集
+		ResultSet rs = ps.executeQuery();
+		int totalPages = 1;
+        while(rs.next()){
+        	totalPages = (int)Math.ceil(rs.getInt("nPersons")/(double)rowsPerPage);
+        }
+
+		// 关闭连接
+		rs.close();
+		ps.close();
+		connection.close();
+		return totalPages;
+	}
 
 	public static ArrayList<QueryInfo> rsToArrayList(ResultSet rs) throws SQLException {
 		ArrayList<QueryInfo> resultList = new ArrayList<>();

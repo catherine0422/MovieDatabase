@@ -61,12 +61,22 @@ public class QueryServlet extends HttpServlet {
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
+		int totalPages = 1;
+		try {
+			totalPages = Postgresql.queryTotalPages(query_year, rowsPerPage);
+		} catch (ClassNotFoundException e) {
+			e.printStackTrace();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+        System.out.println(totalPages);
 		// System.out.println(resultList);
 		// request.setAttribute("message", "Hello, Kunhao\n");
 		request.setAttribute("year", query_year);
 		request.setAttribute("infos", resultList);
 		request.setAttribute("page", page);
 		request.setAttribute("rowsPerPage", rowsPerPage);
+		request.setAttribute("totalPages", totalPages);
 		request.getRequestDispatcher("Index.jsp").forward(request, response);
 	}
 

@@ -109,6 +109,7 @@
 
 				  <% 
 				  int currentPage = (int)request.getAttribute("page");
+				  int totalPages = (int)request.getAttribute("totalPages");
 				  if(currentPage == 1){
 					  %>
 					    <li class="page-item disabled">
@@ -122,16 +123,69 @@
 					    </li>					  
 					  <%				  
 				  }
-				  for (int i = 1; i <= 10; i++) {
-					  if (currentPage == i){
-						  %> <li class="page-item active"><a class="page-link" href="#"><%= i %></a></li>
-						  
-					<%}else{
-						 %> <li class="page-item"><a class="page-link" href="QueryServlet?year=${year}&rowsPerPage=${rowsPerPage}&page=<%= i %>"><%= i %></a></li>
-					<%}}%>	    
-			    <li class="page-item">
-			      <a class="page-link" href="QueryServlet?year=${year}&rowsPerPage=${rowsPerPage}&page=${page+1}">Next</a>
-			    </li>
+				  if(totalPages <= 12){
+					  // if there are less than 12 pages, we show all paginations
+					  for (int i = 1; i <= totalPages; i++) {
+						  if (currentPage == i){
+							  // we set active style for the current page
+							  %> <li class="page-item active"><a class="page-link" href="#"><%= i %></a></li>
+							  
+						<%}else{
+							// we set links to the corresponding pages
+							 %> <li class="page-item"><a class="page-link" href="QueryServlet?year=${year}&rowsPerPage=${rowsPerPage}&page=<%= i %>"><%= i %></a></li>
+						<%}}	    
+				  }else{
+					// if there are more than 12 pages, we show part of the paginations
+					final int shownElements = 4; // we show the first and last four elements
+					if(currentPage <= shownElements || currentPage >= totalPages - shownElements + 1){
+						  int showRight = shownElements;
+						  int showLeft = totalPages - shownElements+1;
+						  if(currentPage == shownElements){
+							  showRight = showRight + 1;
+						  }else{
+							  showLeft = totalPages - shownElements;
+						  }
+						  for (int i = 1; i <= showRight; i++) {
+							  if (currentPage == i){
+								  %> <li class="page-item active"><a class="page-link" href="#"><%= i %></a></li><%
+							}else{
+								 %> <li class="page-item"><a class="page-link" href="QueryServlet?year=${year}&rowsPerPage=${rowsPerPage}&page=<%= i %>"><%= i %></a></li>
+							<%}}
+						  %> <li class="page-item disabled"><a class="page-link" href="#">. . .</a></li><%
+						  for (int i = showLeft; i <= totalPages; i++) {
+							  if (currentPage == i){
+								  %> <li class="page-item active"><a class="page-link" href="#"><%= i %></a></li><%
+							}else{
+								 %> <li class="page-item"><a class="page-link" href="QueryServlet?year=${year}&rowsPerPage=${rowsPerPage}&page=<%= i %>"><%= i %></a></li>
+							<%}}
+					  }else{
+						  %> <li class="page-item"><a class="page-link" href="QueryServlet?year=${year}&rowsPerPage=${rowsPerPage}&page=1">1</a></li><%
+						  %> <li class="page-item disabled"><a class="page-link" href="#">. . .</a></li><%
+						  for (int i = currentPage - shownElements/2; i <= currentPage + shownElements/2; i++) {
+							  if (currentPage == i){
+								  %> <li class="page-item active"><a class="page-link" href="#"><%= i %></a></li><%
+							}else{
+								 %> <li class="page-item"><a class="page-link" href="QueryServlet?year=${year}&rowsPerPage=${rowsPerPage}&page=<%= i %>"><%= i %></a></li>
+							<%}}	  
+						  %> <li class="page-item disabled"><a class="page-link" href="#">. . .</a></li><%
+						  %> <li class="page-item"><a class="page-link" href="QueryServlet?year=${year}&rowsPerPage=${rowsPerPage}&page=<%= totalPages %>"><%= totalPages %></a></li><%
+					  }
+				  }
+				  if(currentPage == totalPages){
+					  %>
+					    <li class="page-item disabled">
+					      <a class="page-link" href="#" tabindex="-1">Next</a>
+					    </li>					  
+					  <%
+				  }else{
+					  %>
+					    <li class="page-item">
+					      <a class="page-link" href="QueryServlet?year=${year}&rowsPerPage=${rowsPerPage}&page=${page+1}">Next</a>
+					    </li>			  
+					  <%				  
+				  }
+				  %>
+
 			  </ul>
 		</div>
 
