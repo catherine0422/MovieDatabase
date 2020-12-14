@@ -40,17 +40,22 @@ public class QueryServlet extends HttpServlet {
 		response.getWriter().append("Served at: ").append(request.getContextPath());
 		request.setCharacterEncoding("utf-8");
 		String query_year = request.getParameter("year");
-		String str_page = request.getParameter("page");
+		String strPage = request.getParameter("page");
+		String strRowsPerPage = request.getParameter("rowsPerPage");
 		int page = 1;
-		if (str_page != null) {
-			page = Integer.parseInt(str_page);
+		int rowsPerPage = 10;
+		if (strPage != null) {
+			page = Integer.parseInt(strPage);
+		}
+		if (strRowsPerPage != null) {
+			rowsPerPage = Integer.parseInt(strRowsPerPage);
 		}
 		String maxYear = this.getServletConfig().getInitParameter("maxYear");
 		// TODO if query_year bigger than maxYear throws an exception
 		System.out.println(maxYear);
 		ArrayList<QueryInfo> resultList = null;
 		try {
-			resultList = Postgresql.queryIndex(query_year, page);
+			resultList = Postgresql.queryIndex(query_year, page, rowsPerPage);
 		} catch (ClassNotFoundException e) {
 			e.printStackTrace();
 		} catch (SQLException e) {
@@ -60,6 +65,8 @@ public class QueryServlet extends HttpServlet {
 		// request.setAttribute("message", "Hello, Kunhao\n");
 		request.setAttribute("year", query_year);
 		request.setAttribute("infos", resultList);
+		request.setAttribute("page", page);
+		request.setAttribute("rowsPerPage", rowsPerPage);
 		request.getRequestDispatcher("Index.jsp").forward(request, response);
 	}
 

@@ -11,14 +11,14 @@ import java.util.ArrayList;
 public class Postgresql {
 	// TODO delete this main function when you think you fully understand
 	public static void main(String[] args) throws Exception {
-		queryIndex("2010", 0);
+		queryIndex("2010", 0, 10);
 	}
 
 	/**
 	 * @throws ClassNotFoundException
 	 * @throws SQLException
 	 */
-	public static ArrayList<QueryInfo> queryIndex(String production_year, int page) throws ClassNotFoundException, SQLException {
+	public static ArrayList<QueryInfo> queryIndex(String production_year, int page, int rowsPerPage) throws ClassNotFoundException, SQLException {
 		// 加载驱动
 		Class.forName("org.postgresql.Driver");
 		// 获得连接对象: 注意：mydb是数据库；postgres：用户名; 123456:密码
@@ -29,7 +29,6 @@ public class Postgresql {
 		ResultSet resultSet = null; // sql查询的返回数据集合
 		connection = DriverManager.getConnection(url);
 		statmment = connection.createStatement();
-		final int onePageRecords = 5;
 		String querySqlString = "SELECT P.id, P.name, P.gender, COUNT(M.id) as movie_nr" + 
 								" FROM person P, actors_info A, movie M" + 
 								" WHERE P.id = A.person_id" + 
@@ -42,8 +41,8 @@ public class Postgresql {
 		PreparedStatement ps = connection.prepareStatement(querySqlString);
 		
 		ps.setString(1, production_year);
-		ps.setInt(2, onePageRecords);
-		ps.setInt(3, (page - 1) * onePageRecords);
+		ps.setInt(2, rowsPerPage);
+		ps.setInt(3, (page - 1) * rowsPerPage);
 		// 返回结果集
 		ResultSet rs = ps.executeQuery();
 		// 遍历数据
