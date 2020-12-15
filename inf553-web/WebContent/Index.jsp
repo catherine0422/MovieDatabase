@@ -1,6 +1,12 @@
 <%@ page language="java" contentType="text/html; charset=utf-8"
 	pageEncoding="utf-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ page errorPage="Error.jsp" %>
+
+<%
+int currentPage = (int)request.getAttribute("page");
+int totalPages = (int)request.getAttribute("totalPages");
+%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -58,6 +64,7 @@
         		<INPUT TYPE="hidden" NAME="rowsPerPage" VALUE="${rowsPerPage}">
         		<button class="btn btn-outline-primary ml-2" type="submit">Search</button>
       		</form>
+      		<span class="text-muted">(before 2050)</span>
 		</div>
 		
 		<!-- table -->
@@ -114,10 +121,7 @@
 	
 			<!-- pagination -->
 			<ul class="pagination justify-content-end">
-			 <% 
-			 int currentPage = (int)request.getAttribute("page");
-			 int totalPages = (int)request.getAttribute("totalPages");
-			 
+			 <% 			 
 			 // the 'previous' button
 			 if(currentPage == 1){
 				// disable the 'previous' button if the current page is 1

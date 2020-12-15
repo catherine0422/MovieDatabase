@@ -28,17 +28,6 @@
 	.navbar, .main{
 		box-shadow: 0 0 30px 0 rgba(82,63,105,.05);
 	}
-	.title-text{
-		font-weight: 500;
-	    font-size: 1.275rem;
-	    color: #181c32;
-	}
-	select.custom-select{
-		width:auto;
-	}
-	.foot{
-		justify-content:space-between;
-	}
 </style>
 <body>
 
