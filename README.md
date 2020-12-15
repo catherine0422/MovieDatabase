@@ -124,3 +124,9 @@ To remove the change.
 ```
 postgres=# \i down.sql
 ```
+
+## Web application
+
+1. Start the db `pg_ctl start -D ./data -l ./log/logFile.txt`
+2. Start the servlet.
+3. Go to the page 'http://localhost:8080/inf553-web/QueryServlet' in the browser.
