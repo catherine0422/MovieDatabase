@@ -1,5 +1,9 @@
 package edu.polytechnique.inf553;
 
+/*
+ *   The class for the result of main query: actor and movies played in a certain year
+ * */
+
 public class QueryInfo {
 	public String personId;
 	public String personName;

@@ -14,17 +14,17 @@ import javax.servlet.http.HttpServletResponse;
  * Servlet implementation class InfoDisplay
  * Returns the personal page for an actor
  */
-@WebServlet("/InfoDisplay")
-public class InfoDisplay extends HttpServlet {
+@WebServlet("/ActorInfoServlet")
+public class ActorInfoServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
-	public InfoDisplay() {
+	public ActorInfoServlet() {
 		super();
 	}
 
 	/**
 	 * deGet parameter:
-	 *  	@pid: person id 
+	 *  	@param pid: person id 
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
@@ -46,7 +46,7 @@ public class InfoDisplay extends HttpServlet {
 		// Direct to the InfoDisplay page
 		request.setAttribute("pif", pif);
 		request.setAttribute("mif", mif);
-		request.getRequestDispatcher("InfoDisplay.jsp").forward(request, response);
+		request.getRequestDispatcher("ActorInfo.jsp").forward(request, response);
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)

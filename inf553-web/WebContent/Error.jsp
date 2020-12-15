@@ -38,6 +38,7 @@
 	 	<a class="navbar-brand" href="#">IMBD movie database</a>
 	</nav>
 
+	<!-- Error card -->
 	<div class = "d-flex justify-content-center mt-5">
 		<div class="card text-white bg-warning mb-3 w-50">
 		  <div class="card-header">${errorType} </div>

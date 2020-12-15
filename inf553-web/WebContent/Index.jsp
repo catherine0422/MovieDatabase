@@ -84,7 +84,7 @@ int totalPages = (int)request.getAttribute("totalPages");
 							<th scope="col">${info.personId}</th>
 							<td>
 								<!-- redirect to the actor information -->
- 								<FORM NAME="form" ACTION="InfoDisplay" METHOD="get">
+ 								<FORM NAME="form" ACTION="ActorInfoServlet" METHOD="get">
 									<INPUT class="btn btn-outline-primary" TYPE="submit" VALUE="${info.personName}"> 
 									<INPUT TYPE="hidden" NAME="pid" VALUE="${info.personId}">
 								</FORM>
