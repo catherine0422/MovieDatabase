@@ -31,7 +31,16 @@ Also, each person has a personal page that shows their basic information (gender
    PSQLPath/pg ctl -D DATAPath -l LOGPath/logfile start
    ```
 
-2. Start the tomcat servlet.
+2. Change the parameters for JDBC connection in the `Postgresql.java` file according to your own settings. The code is on the first four lines of the class:
 
-3. Go to the page http://localhost:8080/inf553-web/QueryServlet?year=2011 on your browser. You can also change the year parameter '2011' into a year smaller than 2050.
+   ```java
+   public static final String PORT = "5432"; 			// port of the postgreSql server
+   public static final String DATABASE = "postgres"; 	// name of the IMDB database in your postgreSql
+   public static final String USER = "postgres";		// postgreSql user name 
+   public static final String PASSWORD = "123456";		// password of the user
+   ```
+
+3. Start the tomcat servlet.
+
+4. Go to the page http://localhost:8080/inf553-web/QueryServlet?year=2011 on your browser. You can also change the year parameter '2011' into a year smaller than 2050.
 

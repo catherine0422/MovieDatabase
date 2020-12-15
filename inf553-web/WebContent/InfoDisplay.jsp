@@ -1,3 +1,4 @@
+<%@page import="java.awt.print.Printable"%>
 <%@ page language="java" contentType="text/html; charset=utf-8"
 	pageEncoding="utf-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
@@ -45,13 +46,13 @@
 	<div class="main container-md bg-white">
 			
 		<div class="card bg-light">
-		  <div class="card-body">
+		  <div class="card-body"> 
 		  	<%
 		  		// add gender
 		  		if(personGender.equals("m")){
-		  			%><h3 class="card-title">Mr. ${pif.name}</h3><%
+		  			%><h3 class="card-title">Mr.  ${pif.name}</h3><%
 		  		}else if(personGender.equals("f")){
-		  			%><h3 class="card-title">Mrs. ${pif.name}</h3><%
+		  			%><h3 class="card-title">Mrs.  ${pif.name}</h3><%
 		  		}else{
 		  			%><h3 class="card-title">${pif.name}</h3><%
 		  		}

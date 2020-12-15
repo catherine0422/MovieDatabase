@@ -1,5 +1,9 @@
 package edu.polytechnique.inf553;
 
+/*
+ *   The class for a movie, contains information to shown in the movie list
+ * */
+
 public class MovieInfo {
 	public String id;
 	public String name;

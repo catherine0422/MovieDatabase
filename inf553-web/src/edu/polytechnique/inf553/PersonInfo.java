@@ -1,5 +1,9 @@
 package edu.polytechnique.inf553;
 
+/*
+ *   The class for a person, contains information to shown in the personal page
+ * */
+
 public class PersonInfo {
 	public String id;
 	public String gender;
