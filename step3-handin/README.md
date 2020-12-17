@@ -52,7 +52,7 @@ Also, each person has a personal page that shows their basic information (gender
 
 1. Go to the page http://localhost:8080/inf553-web/QueryServlet?year=2011 on your browser. You can also change the year parameter '2011' into a year smaller than 2050. 
 
-   ![](.\presentation_pictures\index.jpg)
+   ![](./presentation_pictures/index.jpg)
 
    1. You will see information about actors and their number of movies played in that year.
    2. You can then query a certain year by the search bar.
@@ -60,13 +60,13 @@ Also, each person has a personal page that shows their basic information (gender
 
 2. Click on the actor name, you can go to the personal page of that actor.
 
-   ![](.\presentation_pictures\actorInfo.jpg)
+   ![](./presentation_pictures/actorInfo.jpg)
 
    You can see the gender, birth year and acted movie in this page.
 
 3. If you encounter an error, an exception will be throwed to the server, and you will also see an error page on the browser.
 
-   ![](.\presentation_pictures\error.jpg)
+   ![](./presentation_pictures/error.jpg)
 
 ## Presentation
 
