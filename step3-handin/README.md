@@ -14,7 +14,9 @@ Also, each person has a personal page that shows their basic information (gender
 
 2. Java jdk >= 14.0
 
-3. We will use the materialized view actor_info created in the step 2, so please make sure you have created this view before using our web application. The script for creating the view is:
+3. PostgreSQL
+
+4. We will use the materialized view actor_info created in the step 2, so please make sure you have created this view before using our web application. The script for creating the view is:
 
    ```sql
    CREATE MATERIALIZED VIEW actors_info AS
