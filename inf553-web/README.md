@@ -12,9 +12,11 @@ Also, each person has a personal page that shows their basic information (gender
 
 1. Tomcat 9.0
 
-2. Java jdk
+2. Java jdk >= 14.0
 
-3. We will use the materialized view actor_info created in the step 2, so please make sure you have created this view before using our web application. The script for creating the view is:
+3. PostgreSQL
+
+4. We will use the materialized view actor_info created in the step 2, so please make sure you have created this view before using our web application. The script for creating the view is:
 
    ```sql
    CREATE MATERIALIZED VIEW actors_info AS
@@ -50,7 +52,7 @@ Also, each person has a personal page that shows their basic information (gender
 
 1. Go to the page http://localhost:8080/inf553-web/QueryServlet?year=2011 on your browser. You can also change the year parameter '2011' into a year smaller than 2050. 
 
-   ![](.\presentation_pictures\index.jpg)
+   ![](./presentation_pictures/index.jpg)
 
    1. You will see information about actors and their number of movies played in that year.
    2. You can then query a certain year by the search bar.
@@ -58,13 +60,13 @@ Also, each person has a personal page that shows their basic information (gender
 
 2. Click on the actor name, you can go to the personal page of that actor.
 
-   ![](.\presentation_pictures\actorInfo.jpg)
+   ![](./presentation_pictures/actorInfo.jpg)
 
    You can see the gender, birth year and acted movie in this page.
 
 3. If you encounter an error, an exception will be throwed to the server, and you will also see an error page on the browser.
 
-   ![](.\presentation_pictures\error.jpg)
+   ![](./presentation_pictures/error.jpg)
 
 ## Presentation
 
